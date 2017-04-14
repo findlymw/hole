@@ -31,7 +31,7 @@ router.get('/', function(req, res) {
       })
 
       res.render('index', {
-        title: '网络工程树洞',
+        title: '金投手-树洞',
         success: req.flash('success').toString(),
         error: req.flash('error').toString(),
         user: req.session.token,
@@ -112,7 +112,7 @@ router.get('/YWRtaW4=', function(req, res) {
     })
 
     res.render('admin', {
-      title: '网络工程树洞-管理界面',
+      title: '金投手-管理界面',
       wishes: wishes
     });
   })
