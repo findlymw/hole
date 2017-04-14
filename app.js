@@ -11,7 +11,7 @@ var testRoutes = require('./routes/test')
 var app = express();
 
 //for cookie session
-var settings = require('./settings');
+var settings = require('./settings').settings;
 var session    = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
@@ -32,6 +32,8 @@ if (process.env.SERVER_SOFTWARE == 'bae/3.0') {
   app.use(session({
     secret: settings.cookieSecret,
     key: 'hole',
+      resave : true,
+      saveUninitialized : true,
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
     store: new MongoStore({
       host: settings.db_host,
@@ -49,7 +51,7 @@ else {
     key: 'hole',
     cookie: {maxAge: 1000 * 60 * 60 * 24 * 30},//30 days
     store: new MongoStore({
-      db: 'hole'
+        url:'mongodb://localhost/'+settings.db_name
     })
   }));
 }
